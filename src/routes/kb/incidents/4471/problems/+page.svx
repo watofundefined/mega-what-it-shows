@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: support desk
 status: open
 reviewed: 2026-10-28
-signature: Matej Duracka
+signature: v1.eyJzdWIiOiIxMjk1IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjU3OTYsImV4cCI6MTc5MzMxMjE5Nn0.vCigBK3qcf0IFNUWCWFx5K30SSBZIcegjWEWWz5Hgc8
 ---
 
 <script>
