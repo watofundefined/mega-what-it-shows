@@ -1,0 +1,53 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: support desk
+status: open
+reviewed: 2026-10-28
+signature: Matej Duracka
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+
+  const tickets = {
+    parser: 'https://github.com/watofundefined/mega-what-it-shows/issues/1',
+    hint: 'https://github.com/watofundefined/mega-what-it-shows/issues/2',
+    'one-day': 'https://github.com/watofundefined/mega-what-it-shows/issues/3',
+  };
+</script>
+
+[#4471](/kb/incidents/4471) says one issue, one fix queued. Its own cause table shows otherwise,
+and the report text shows a third problem the table files away as a footnote.
+
+<Callout kind="warn">
+Not one issue. Three problems, each with its own ticket. The queued parser fix closes only the first.
+</Callout>
+
+## The problems
+
+<ProblemTable ticket={4471} {tickets} />
+
+- **parser:** the shared parser reads day-first dates month first. Every report that names both
+  dates shows an exact day/month swap.
+- **hint:** the booking-v3 form prints `MM/DD/YYYY`, then reads what people typed day first.
+  Only form reports from booking-v3 tenants. A parser fix does not change the hint.
+- **one-day:** the date moves by one day, and it depends on where the reader is ("Client in
+  Lisbon got Tuesday. Client in Toronto got Monday."). These are the desk's one-day moves.
+  `CauseTable` counts them under `parser` because of their tenant; a parser fix will not touch them.
+
+## What #4471 shows today
+
+<CauseTable ticket={4471} />
+
+## Why they were merged
+
+Reports merge on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). All three
+problems arrive under the same subjects ("Date is wrong", "Month and day swapped?"), so
+subject matching put them in one ticket. Intake's tag does not separate them either: it guesses
+from the reporter's browser, and the cause depends on the tenant and the way in.
+
+<RenderStamp {signature} />
