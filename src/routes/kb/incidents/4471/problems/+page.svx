@@ -1,9 +1,9 @@
 ---
 layout: runbook
-title: '#4471 · three problems, not one'
+title: '#4471 · two problems, not one'
 owner: support desk
 status: open
-reviewed: 2026-10-28
+reviewed: 2026-10-29
 signature: v1.eyJzdWIiOiIxMjk1IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjU3OTYsImV4cCI6MTc5MzMxMjE5Nn0.vCigBK3qcf0IFNUWCWFx5K30SSBZIcegjWEWWz5Hgc8
 ---
 
@@ -16,15 +16,13 @@ signature: v1.eyJzdWIiOiIxMjk1IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYX
   const tickets = {
     parser: 'https://github.com/watofundefined/mega-what-it-shows/issues/1',
     hint: 'https://github.com/watofundefined/mega-what-it-shows/issues/2',
-    'one-day': 'https://github.com/watofundefined/mega-what-it-shows/issues/3',
   };
 </script>
 
-[#4471](/kb/incidents/4471) says one issue, one fix queued. Its own cause table shows otherwise,
-and the report text shows a third problem the table files away as a footnote.
+[#4471](/kb/incidents/4471) says one issue, one fix queued. Its own cause table shows two causes.
 
 <Callout kind="warn">
-Not one issue. Three problems, each with its own ticket. The queued parser fix closes only the first.
+Not one issue. Two problems, each with its own ticket. The queued parser fix closes only the first.
 </Callout>
 
 ## The problems
@@ -32,12 +30,10 @@ Not one issue. Three problems, each with its own ticket. The queued parser fix c
 <ProblemTable ticket={4471} {tickets} />
 
 - **parser:** the shared parser reads day-first dates month first. Every report that names both
-  dates shows an exact day/month swap.
+  dates shows an exact day/month swap. The desk's one-day moves come from parser tenants and are
+  counted here.
 - **hint:** the booking-v3 form prints `MM/DD/YYYY`, then reads what people typed day first.
   Only form reports from booking-v3 tenants. A parser fix does not change the hint.
-- **one-day:** the date moves by one day, and it depends on where the reader is ("Client in
-  Lisbon got Tuesday. Client in Toronto got Monday."). These are the desk's one-day moves.
-  `CauseTable` counts them under `parser` because of their tenant; a parser fix will not touch them.
 
 ## What #4471 shows today
 
@@ -45,7 +41,7 @@ Not one issue. Three problems, each with its own ticket. The queued parser fix c
 
 ## Why they were merged
 
-Reports merge on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). All three
+Reports merge on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). Both
 problems arrive under the same subjects ("Date is wrong", "Month and day swapped?"), so
 subject matching put them in one ticket. Intake's tag does not separate them either: it guesses
 from the reporter's browser, and the cause depends on the tenant and the way in.
