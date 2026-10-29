@@ -18,6 +18,7 @@ src/routes/kb/      the pages (.svx: Markdown with components)
 src/lib/kb/         components and the logic they run
 src/lib/layouts/    the frame every page shares
 src/lib/data/       exports from the ticket system
+rendered/           the pages as the desk sees them, built by `npm run render` (don't edit by hand)
 ```
 
 ## Conventions
